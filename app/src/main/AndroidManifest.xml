@@ -17,6 +17,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScream"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>

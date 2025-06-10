@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582856699405",
+    "project_id": "exameperiodicoapp",
+    "storage_bucket": "exameperiodicoapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582856699405:android:6366529969c9c165b26f44",
+        "android_client_info": {
+          "package_name": "com.example.exameperiodicojf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9jhyxr2f3lGb02p55ltjbp4_qu1VnChA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import static android.view.View.INVISIBLE;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -14,8 +15,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.exameperiodicojf.adapter.ConsultaAdapter;
+import com.example.exameperiodicojf.model.Consulta;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -107,7 +114,25 @@ public class AreaRestrita extends Fragment {
                     textInputLayout.setVisibility(View.INVISIBLE);
                     validar.setVisibility(View.INVISIBLE);
                     mensagemRestrita.setVisibility(View.INVISIBLE);
+
+                    // Simulando uma lista de dados
+                    List<Consulta> lista = new ArrayList<>();
+
+                    Calendar inicio = Calendar.getInstance();
+                    Calendar termino = Calendar.getInstance();
+                    termino.add(Calendar.DAY_OF_MONTH, 7);
+
+                    lista.add(new Consulta("123456", inicio.getTime(), termino.getTime()));
+                    lista.add(new Consulta("654321", inicio.getTime(), termino.getTime()));
+                    lista.add(new Consulta("987654", inicio.getTime(), termino.getTime()));
+
+                    // Configura o RecyclerView
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    ConsultaAdapter adapter = new ConsultaAdapter(lista);
+                    recyclerView.setAdapter(adapter);
+
                     recyclerView.setVisibility(View.VISIBLE);
+
                 } else {
                     mensagemRestrita.setVisibility(View.VISIBLE);
                 }

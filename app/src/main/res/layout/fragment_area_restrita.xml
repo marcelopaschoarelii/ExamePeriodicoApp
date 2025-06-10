@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
     tools:context=".AreaRestrita">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,7 +20,6 @@
             android:id="@+id/credenciais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
             android:text="Credenciais"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,21 +45,22 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="411dp"
-            android:layout_height="507dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/credencial" />
+            app:layout_constraintTop_toBottomOf="@+id/mensagemRestrita"
+            tools:listitem="@layout/credencial_item" />
 
         <TextView
             android:id="@+id/mensagemRestrita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="Senha inválida!"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -68,12 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Entrar"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mensagemRestrita"
-            app:layout_constraintVertical_bias="0.031" />
+            app:layout_constraintVertical_bias="0.03" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

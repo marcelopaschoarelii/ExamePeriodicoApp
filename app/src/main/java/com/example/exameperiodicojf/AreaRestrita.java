@@ -1,12 +1,21 @@
 package com.example.exameperiodicojf;
 
+import static android.view.View.INVISIBLE;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,16 @@ public class AreaRestrita extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String senhaCredencial;
+    private TextInputEditText senha;
+    private TextView credencial;
+    private TextView mensagemRestrita;
+    private RecyclerView recyclerView;
+    private Button validar;
+    private TextInputLayout textInputLayout;
+
+
 
     public AreaRestrita() {
         // Required empty public constructor
@@ -59,6 +78,44 @@ public class AreaRestrita extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_area_restrita, container, false);
+        View view = inflater.inflate(R.layout.fragment_area_restrita, container, false);
+
+        senhaCredencial = "admin123";
+        validar = view.findViewById(R.id.validar);
+
+        credencial = view.findViewById(R.id.credenciais);
+        senha = view.findViewById(R.id.senha);
+
+        mensagemRestrita = view.findViewById(R.id.mensagemRestrita);
+        mensagemRestrita.setVisibility(INVISIBLE);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setVisibility(INVISIBLE);
+
+        textInputLayout = view.findViewById(R.id.textInputLayout);
+
+
+
+        validar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (senha.getText().toString().equals(senhaCredencial)){
+                    credencial.setText("Seja bem Vindo!");
+
+                    credencial.setTextSize(24);
+                    senha.setVisibility(View.INVISIBLE);
+                    textInputLayout.setVisibility(View.INVISIBLE);
+                    validar.setVisibility(View.INVISIBLE);
+                    mensagemRestrita.setVisibility(View.INVISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    mensagemRestrita.setVisibility(View.VISIBLE);
+                }
+            }
+
+        });
+
+
+        return view;
     }
 }

@@ -11,9 +11,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.exameperiodicojf.DatabaseUsuario;
 import com.example.exameperiodicojf.R;
+import com.example.exameperiodicojf.model.Usuario;
 import com.example.exameperiodicojf.ui.login.Login;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,20 +57,8 @@ public class Cadastro extends AppCompatActivity {
         }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Map<String, Object> usuarios = new HashMap<>();
-        usuarios.put("nome", stringNome);
-        usuarios.put("email", stringEmail);
-        usuarios.put("senha", stringSenha);
-
-        // Trocar nome da colection aqui, tbm não sei se é esse, coloquei o email como id, tbm não sei se está assim
-
-        db.collection("Usuarios").document(stringEmail)
-                .set(usuarios)
-                .addOnSuccessListener(unused ->
-                        Log.d("db", "Sucesso ao salvar usuário"))
-                .addOnFailureListener(e ->
-                        Log.e("db", "Erro ao salvar usuário", e));
+        DatabaseUsuario databaseUsuario = new DatabaseUsuario();
+        databaseUsuario.registrarUsuario(new Usuario(stringNome, stringEmail, stringSenha));
     }
 
     public void cliqueCadastrar(View view) {

@@ -2,8 +2,10 @@ package com.example.exameperiodicojf.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +13,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.exameperiodicojf.DatabaseUsuario;
+import com.example.exameperiodicojf.MainActivity;
 import com.example.exameperiodicojf.R;
+import com.example.exameperiodicojf.callback.UsuarioCallback;
+import com.example.exameperiodicojf.model.Usuario;
 import com.example.exameperiodicojf.ui.cadastro.Cadastro;
 import com.example.exameperiodicojf.ui.home.HomeFragment;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
 
@@ -28,9 +37,16 @@ public class Login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fazerLogin();
+            }
+        });
     }
 
-    private void FazerLogin() {
+    private void fazerLogin() {
 
         TextInputEditText emailEditText = findViewById(R.id.emailLogin);
         TextInputEditText senhaEditText = findViewById(R.id.senhaLogin);
@@ -42,28 +58,20 @@ public class Login extends AppCompatActivity {
             Log.d("Erro", "Campos obrigatórios estão vazios");
             return;
         }
+        DatabaseUsuario databaseUsuario = new DatabaseUsuario();
+        databaseUsuario.fazerLogin(stringEmail, stringSenha, new UsuarioCallback() {
+            @Override
+            public void onSuccess(Usuario usuario) {
+                Log.d("Login", "Login OK: " + usuario.getNome());
+                startActivity(new Intent(Login.this, MainActivity.class));
+            }
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("pipopipo")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        QuerySnapshot documentSnapshots = task.getResult();
-                        for (DocumentSnapshot document : documentSnapshots) {
+            @Override
+            public void onFailure(String erro) {
+                Log.e("Login", "Erro: " + erro);
+            }
+        });
 
-                            String senha = document.getString("senha");
-
-                            if (stringSenha.equals(senha)) {
-                                Intent intent = new Intent(Login.this, HomeFragment.class);
-                                startActivity(intent);
-                            } else {
-                                Log.d("Erro", "Senha incorreta");
-                            }
-                        }
-                    } else {
-                        Log.w("FirestoreData", "Erro ao obter documentos.");
-                    }
-                });
     }
 
     public void abrirCadastro(View view) {

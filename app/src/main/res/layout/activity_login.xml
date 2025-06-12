@@ -104,7 +104,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="37dp"
-        android:text="Fazer cadastro"
+        android:text="Fazer Login"
         android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"

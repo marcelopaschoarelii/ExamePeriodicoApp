@@ -25,6 +25,11 @@ public class Consulta {
         return dataTermino;
     }
 
+    public void setDataTermino(Date dataTermino){
+        this.dataTermino=dataTermino;
+    }
+
+
     public Consulta(Date dataInicio, String cracha, String id) {
         this.dataInicio = dataInicio;
         this.cracha = cracha;

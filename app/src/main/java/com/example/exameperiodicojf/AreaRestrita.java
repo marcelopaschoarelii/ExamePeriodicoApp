@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.exameperiodicojf.adapter.ConsultaAdapter;
+import com.example.exameperiodicojf.callback.ConsultaCallback;
 import com.example.exameperiodicojf.model.Consulta;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -45,9 +46,10 @@ public class AreaRestrita extends Fragment {
     private TextView credencial;
     private TextView mensagemRestrita;
     private RecyclerView recyclerView;
+    private ConsultaAdapter adapter;
+    private DatabaseConsulta databaseConsulta;
     private Button validar;
     private TextInputLayout textInputLayout;
-
 
 
     public AreaRestrita() {
@@ -101,12 +103,14 @@ public class AreaRestrita extends Fragment {
 
         textInputLayout = view.findViewById(R.id.textInputLayout);
 
+        databaseConsulta = new DatabaseConsulta();
+
 
 
         validar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (senha.getText().toString().equals(senhaCredencial)){
+                if (senha.getText().toString().equals(senhaCredencial)) {
                     credencial.setText("Seja bem Vindo!");
 
                     credencial.setTextSize(24);
@@ -115,23 +119,12 @@ public class AreaRestrita extends Fragment {
                     validar.setVisibility(View.INVISIBLE);
                     mensagemRestrita.setVisibility(View.INVISIBLE);
 
-                    // Simulando uma lista de dados
-                    List<Consulta> lista = new ArrayList<>();
+                    carregarConsultas();
 
                     Calendar inicio = Calendar.getInstance();
                     Calendar termino = Calendar.getInstance();
                     termino.add(Calendar.DAY_OF_MONTH, 7);
 
-                    lista.add(new Consulta("123456", inicio.getTime(), termino.getTime()));
-                    lista.add(new Consulta("654321", inicio.getTime(), termino.getTime()));
-                    lista.add(new Consulta("987654", inicio.getTime(), termino.getTime()));
-
-                    // Configura o RecyclerView
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    ConsultaAdapter adapter = new ConsultaAdapter(lista);
-                    recyclerView.setAdapter(adapter);
-
-                    recyclerView.setVisibility(View.VISIBLE);
 
                 } else {
                     mensagemRestrita.setVisibility(View.VISIBLE);
@@ -143,4 +136,22 @@ public class AreaRestrita extends Fragment {
 
         return view;
     }
+
+    private void carregarConsultas() {
+        databaseConsulta.listarConsultas(new ConsultaCallback() {
+            @Override
+            public void onConsultasRecebidas(List<Consulta> consultas) {
+                adapter = new ConsultaAdapter(consultas);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setVisibility(View.VISIBLE);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            }
+
+            @Override
+            public void onErro(Exception e) {
+                Toast.makeText(getContext(), "Erro ao carregar consultas", Toast.LENGTH_SHORT).show();
+            }});
+    }
+
 }

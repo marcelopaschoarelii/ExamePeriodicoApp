@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.exameperiodicojf.Database;
+import com.example.exameperiodicojf.DatabaseConsulta;
 import com.example.exameperiodicojf.databinding.FragmentHomeBinding;
 import com.example.exameperiodicojf.model.Consulta;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,7 +24,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private Database database;
+    private DatabaseConsulta database;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
 
         final Button myButton = binding.button3;
         final TextInputEditText textCracha = binding.crachaInput;
-        database = new Database();
+        database = new DatabaseConsulta();
 
 
         myButton.setOnClickListener(new View.OnClickListener() {

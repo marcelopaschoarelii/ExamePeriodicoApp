@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.exameperiodicojf.Database;
+import com.example.exameperiodicojf.DatabaseConsulta;
 import com.example.exameperiodicojf.Historico;
 import com.example.exameperiodicojf.R;
 import com.example.exameperiodicojf.model.Consulta;
@@ -24,7 +24,7 @@ public class HistoricoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     private List<Consulta> listaConsulta;
-    private Database database;
+    private DatabaseConsulta database;
     private int tipo;
 
     public HistoricoAdapter(List<Consulta> lista) {

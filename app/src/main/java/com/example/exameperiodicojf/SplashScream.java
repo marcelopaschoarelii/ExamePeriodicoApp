@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.exameperiodicojf.ui.cadastro.Cadastro;
+
 public class SplashScream extends AppCompatActivity {
 
     @Override
@@ -33,7 +35,7 @@ public class SplashScream extends AppCompatActivity {
     }
 
     void abrirTela(){
-        Intent rota = new Intent(this, MainActivity.class);
+        Intent rota = new Intent(this, Cadastro.class);
         startActivity(rota);
         finish();
     }

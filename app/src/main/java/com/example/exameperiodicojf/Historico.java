@@ -3,10 +3,19 @@ package com.example.exameperiodicojf;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.exameperiodicojf.adapter.HistoricoAdapter;
+import com.example.exameperiodicojf.model.Consulta;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +34,7 @@ public class Historico extends Fragment {
     private String mParam2;
 
     public Historico() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -58,7 +67,19 @@ public class Historico extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_historico, container, false);
+        View view = inflater.inflate(R.layout.fragment_historico, container, false);
+
+        List<Consulta> lista = new ArrayList<>();
+        lista.add(new Consulta("1021634025",new Date(0,0,0,12,34), new Date()));
+        lista.add(new Consulta(new Date(0,0,0,12,34),"56789024432"));
+
+        HistoricoAdapter historicoAdapter = new HistoricoAdapter(lista);
+
+        RecyclerView recyclerView = view.findViewById(R.id.recycleHistorico);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(historicoAdapter);
+
+        return view;
     }
+
 }

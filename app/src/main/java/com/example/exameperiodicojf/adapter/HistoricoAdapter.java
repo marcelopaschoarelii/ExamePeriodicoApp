@@ -1,8 +1,11 @@
 package com.example.exameperiodicojf.adapter;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -10,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exameperiodicojf.DatabaseConsulta;
+import com.example.exameperiodicojf.Historico;
 import com.example.exameperiodicojf.R;
 import com.example.exameperiodicojf.model.Consulta;
 
@@ -23,9 +27,14 @@ public class HistoricoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<Consulta> listaConsulta;
     private DatabaseConsulta database;
     private int tipo;
+    private Context context;
 
-    public HistoricoAdapter(List<Consulta> lista) {
+
+    public HistoricoAdapter(List<Consulta> lista, Context context, DatabaseConsulta database) {
         this.listaConsulta = lista;
+        this.context = context;
+        this.database = database;
+
     }
 
     @NonNull
@@ -50,6 +59,18 @@ public class HistoricoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         String cracha = consulta.getCracha();
         String horaInicio = sdf.format(consulta.getDataInicio());
 
+
+        Dialog caixaAlert = new Dialog(context);
+        caixaAlert.setContentView(R.layout.custom);
+
+//      Definfindo que o tamanho do layout é wrap content
+        caixaAlert.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        caixaAlert.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        Button btSim = caixaAlert.findViewById(R.id.buttonSimCustom);
+        Button btNao = caixaAlert.findViewById(R.id.buttonNaoCustom);
+
+
         if (holder instanceof ViewHolderTermino) {
             ViewHolderTermino viewH = (ViewHolderTermino) holder;
             viewH.cracha.setText(cracha);
@@ -62,11 +83,26 @@ public class HistoricoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             viewH.encerrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Date dataTermino = new Date();
-                    consulta.setDataTermino(dataTermino);
-                    database.encerrarConsulta(consulta.getId(), dataTermino);
-                    notifyDataSetChanged();
 
+                    caixaAlert.show();
+
+                    btSim.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Date dataTermino = new Date();
+                            consulta.setDataTermino(dataTermino);
+                            database.encerrarConsulta(consulta.getId(), dataTermino);
+                            notifyDataSetChanged();
+                            caixaAlert.dismiss();
+                        }
+                    });
+
+                    btNao.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            caixaAlert.dismiss();
+                        }
+                    });
                 }
             });
         }

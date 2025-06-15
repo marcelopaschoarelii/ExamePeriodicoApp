@@ -85,7 +85,7 @@ public class Historico extends Fragment {
         databaseConsulta.listarConsultas(new ConsultaCallback() {
             @Override
             public void onConsultasRecebidas(List<Consulta> consultas) {
-                adapter = new HistoricoAdapter(consultas, databaseConsulta);
+                adapter = new HistoricoAdapter(consultas, requireContext(), databaseConsulta);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setVisibility(View.VISIBLE);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

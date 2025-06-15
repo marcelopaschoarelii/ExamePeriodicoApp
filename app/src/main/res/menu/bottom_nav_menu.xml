@@ -14,10 +14,6 @@
         android:id="@+id/historico"
         android:icon="@drawable/hist_icon"
         android:title="Histórico" />
-    <item
-        android:id="@+id/perfil"
-        android:icon="@drawable/perfil_icon"
-        android:title="Perfil" />
 
 
 </menu>

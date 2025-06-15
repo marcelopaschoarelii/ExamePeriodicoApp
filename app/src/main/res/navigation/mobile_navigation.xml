@@ -20,10 +20,5 @@
         android:name="com.example.exameperiodicojf.Historico"
         android:label="fragment_historico"
         tools:layout="@layout/fragment_historico" />
-    <fragment
-        android:id="@+id/perfil"
-        android:name="com.example.exameperiodicojf.Perfil"
-        android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
 
 </navigation>

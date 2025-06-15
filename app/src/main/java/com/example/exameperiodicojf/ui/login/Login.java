@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +70,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(String erro) {
                 Log.e("Login", "Erro: " + erro);
+                TextView  erroUsuarioOuSenha = findViewById(R.id.erroUsuarioOuSenha);
+                erroUsuarioOuSenha.setText("Usuário ou senha incorretos");
+
             }
         });
 

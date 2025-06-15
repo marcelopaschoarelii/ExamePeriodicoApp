@@ -40,9 +40,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Consulta consulta = new Consulta( new Date(),textCracha.getText().toString());
+                textCracha.setText("");
                 database.registrarConsulta(consulta);
 
-                Toast.makeText(getContext(), "Botão 'Clique-me!' clicado!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Consulta registrada!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -113,6 +113,7 @@ public class AreaRestrita extends Fragment {
                 if (senha.getText().toString().equals(senhaCredencial)) {
                     credencial.setText("Seja bem Vindo!");
 
+                    senha.setText("");
                     credencial.setTextSize(24);
                     senha.setVisibility(View.INVISIBLE);
                     textInputLayout.setVisibility(View.INVISIBLE);

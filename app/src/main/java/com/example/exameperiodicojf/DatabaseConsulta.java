@@ -48,7 +48,9 @@ public class DatabaseConsulta {
                         String id = doc.getId();
                         String cracha = doc.getString("cracha");
                         Date dataInicio = doc.getDate("dataInicio");
-                        Consulta consulta = new Consulta( dataInicio, cracha, id);
+                        Date dataTermino = doc.getDate("dataTermino");
+                        Consulta consulta = new Consulta(dataInicio, cracha, id);
+                        consulta.setDataTermino(dataTermino);
                         Log.d("FirestoreDebug", "Chamando collection.get()");
 
                         lista.add(consulta);
@@ -68,6 +70,17 @@ public class DatabaseConsulta {
                         Log.d(TAG, "Consulta removida com sucesso!"))
                 .addOnFailureListener(e ->
                         Log.w(TAG, "Erro ao remover consulta", e));
+    }
+    public void encerrarConsulta(String id, Date dataTermino) {
+        Map<String, Object> update = new HashMap<>();
+        update.put("dataTermino", dataTermino);
+
+        collection.document(id)
+                .update(update)
+                .addOnSuccessListener(aVoid ->
+                        Log.d(TAG, "Consulta encerrada com sucesso!"))
+                .addOnFailureListener(e ->
+                        Log.w(TAG, "Erro ao encerrar consulta", e));
     }
 
 

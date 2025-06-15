@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.exameperiodicojf.adapter.ConsultaAdapter;
 import com.example.exameperiodicojf.adapter.HistoricoAdapter;
+import com.example.exameperiodicojf.callback.ConsultaCallback;
 import com.example.exameperiodicojf.model.Consulta;
 
 import java.util.ArrayList;
@@ -32,6 +35,9 @@ public class Historico extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
+    private HistoricoAdapter adapter;
+    private DatabaseConsulta databaseConsulta;
 
     public Historico() {
 
@@ -68,18 +74,28 @@ public class Historico extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historico, container, false);
+        recyclerView = view.findViewById(R.id.recycleHistorico);
 
-        List<Consulta> lista = new ArrayList<>();
-        lista.add(new Consulta("1021634025",new Date(0,0,0,12,34), new Date()));
-        lista.add(new Consulta(new Date(0,0,0,12,34),"56789024432"));
-
-        HistoricoAdapter historicoAdapter = new HistoricoAdapter(lista);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recycleHistorico);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(historicoAdapter);
+        databaseConsulta = new DatabaseConsulta();
+        carregarConsultas();
 
         return view;
+    }
+    private void carregarConsultas() {
+        databaseConsulta.listarConsultas(new ConsultaCallback() {
+            @Override
+            public void onConsultasRecebidas(List<Consulta> consultas) {
+                adapter = new HistoricoAdapter(consultas, databaseConsulta);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setVisibility(View.VISIBLE);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            }
+
+            @Override
+            public void onErro(Exception e) {
+                Toast.makeText(getContext(), "Erro ao carregar consultas", Toast.LENGTH_SHORT).show();
+            }});
     }
 
 }

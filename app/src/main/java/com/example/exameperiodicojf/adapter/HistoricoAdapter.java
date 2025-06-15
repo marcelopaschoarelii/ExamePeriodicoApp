@@ -10,13 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exameperiodicojf.DatabaseConsulta;
-import com.example.exameperiodicojf.Historico;
 import com.example.exameperiodicojf.R;
 import com.example.exameperiodicojf.model.Consulta;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -65,11 +62,15 @@ public class HistoricoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             viewH.encerrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    consulta.setDataTermino(new Date());
+                    Date dataTermino = new Date();
+                    consulta.setDataTermino(dataTermino);
+                    database.encerrarConsulta(consulta.getId(), dataTermino);
                     notifyDataSetChanged();
+
                 }
             });
         }
+
     }
 
 
@@ -116,5 +117,10 @@ public class HistoricoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             cracha = itemView.findViewById(R.id.cracha);
             horaTermino = itemView.findViewById(R.id.horaTermino);
         }
+    }
+
+    public HistoricoAdapter(List<Consulta> lista, DatabaseConsulta database) {
+        this.listaConsulta = lista;
+        this.database = database;
     }
 }

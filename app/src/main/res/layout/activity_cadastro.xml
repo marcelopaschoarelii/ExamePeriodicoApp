@@ -47,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:hint="Nome Completo" />
+            android:hint="Nome Completo"
+            android:textColor="@color/md_theme_onBackground" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -102,16 +103,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FDFDFD"
-            android:hint="6 caracteres" />
+            android:hint="6 caracteres"
+            android:textColor="@color/md_theme_onBackground" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button"
         android:layout_width="344dp"
         android:layout_height="62dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="37dp"
         android:backgroundTint="#00363F"
         android:onClick="cliqueCadastrar"
         android:text="Fazer cadastro"
@@ -119,7 +119,7 @@
         android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
@@ -142,12 +142,10 @@
         android:id="@+id/textInputLayout4"
         android:layout_width="354dp"
         android:layout_height="55dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginTop="20dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -156,7 +154,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:hint="ex: colaborador@email.com" />
+            android:hint="ex: colaborador@email.com"
+            android:textColor="@color/md_theme_onBackground" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

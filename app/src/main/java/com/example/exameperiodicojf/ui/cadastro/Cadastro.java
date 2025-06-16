@@ -61,13 +61,13 @@ public class Cadastro extends AppCompatActivity {
             Log.d("Erro", "Campos obrigatórios estão vazios");
             return;
         }
-        if(stringSenha.length() != 6){
+        if(stringSenha.length() < 6){
             erroSenha.setText("A Senha deve conter no mínimo 6 carcateres");
         }
         else{
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DatabaseUsuario databaseUsuario = new DatabaseUsuario();
-            databaseUsuario.registrarUsuario(new Usuario(stringNome, stringEmail, stringSenha));
+            DatabaseUsuario databaseUsuasrio = new DatabaseUsuario();
+            databaseUsuasrio.registrarUsuario(new Usuario(stringNome, stringEmail, stringSenha));
             startActivity(new Intent(Cadastro.this, MainActivity.class));
         }
 
